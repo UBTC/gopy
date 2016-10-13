@@ -247,9 +247,12 @@ for i,j in muloop(12,2):
 [multi-loops]
 """
 
-def muloop(*x):
+def muloop(x):
+    if not (isinstance(x,list) or isinstance(x,numpy.ndarray)):
+        print("\nERROR: muloop must have a list or array with 1-10 items as parameter!")
+        return []
     if len(x)==0:
-        print("\nERROR: muloop must have 1-10 parameter(s)!")
+        print("\nERROR: muloop should have a list or array with 1-10 items as parameter, but received", len(x))
         return []
     elif len(x)==1:
         return range(x[0])
@@ -272,6 +275,7 @@ def muloop(*x):
     elif len(x)==10:
         return itertools.product(range(x[0]), range(x[1]), range(x[2]), range(x[3]), range(x[4]), range(x[5]), range(x[6]), range(x[7]), range(x[8]), range(x[9]))
     else:
+        print("\nERROR: muloop should have a list or array with 1-10 items as parameter, but received", len(x))
         return []
 
 
