@@ -226,23 +226,23 @@ def rlen(x):
 
 
 """
-muloop(12)
+muloop([12])
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
-muloop(12.1)
+muloop([12.1])
 TypeError: 'float' object cannot be interpreted as an integer
 
-muloop(12,1)
+muloop([12,1])
 <itertools.product at 0x...>
 
-muloop(12,-1)
+muloop([12,-1])
 <itertools.product at 0x...>
 
-for i,j in muloop(12,-2):
+for i,j in muloop([12,-2]):
     print(i,j)
 [empty]
 
-for i,j in muloop(12,2):
+for i,j in muloop([12,2]):
     print(i,j)
 [multi-loops]
 """
