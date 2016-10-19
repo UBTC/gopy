@@ -248,8 +248,8 @@ for i,j in muloop([12,2]):
 """
 
 def muloop(x):
-    if not (isinstance(x,list) or isinstance(x,numpy.ndarray)):
-        print("\nERROR: muloop must have a list or array with 1-10 items as parameter!")
+    if not (isinstance(x,list) or isinstance(x,numpy.ndarray) or isinstance(x,tuple)):
+        print("\nERROR: muloop must have a list or array (with 1-10 items) as parameter!")
         return []
     if len(x)==0:
         print("\nERROR: muloop should have a list or array with 1-10 items as parameter, but received", len(x))
