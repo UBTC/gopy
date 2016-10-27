@@ -325,6 +325,12 @@ def equally_divide(lst, segment_len):
 # Out[-]: (3, 2, 3)
 
 
+def avg(x):
+    # avg([2,3,4])
+    # == 3.0
+    return np.mean(x)
+
+
 def minN(a, n):
     if not isinstance(a, list) or not isinstance(a, ndarray): return False
     if n>len(a): n=len(a)
