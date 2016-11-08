@@ -88,13 +88,20 @@ print(datetime_str())
 
 
 # calulate the distance or divergence between 2 sets: A and B, which is
-#    defined as  (c(A)+c(B)-2c(A intersection B))/(c(A)+c(B))
+#    defined as  (c(A)+c(B)-c(A intersection B))/(c(A)+c(B))
 #    where c() counts the element number in that set.
 def sets_divergence(A,B): # A and B are both sets
+    """
+        The Jaccard distance measures dissimilarity between sample sets.
+        It is obtained by dividing
+            the difference of the sizes of the union and the intersection of two sets 
+            by the size of the union.
+        https://en.wikipedia.org/wiki/Jaccard_index
+    """
     if isinstance(A,list) or isinstance(A,numpy.ndarray): A=set(A)
     if isinstance(B,list) or isinstance(B,numpy.ndarray): B=set(B)
     allNum = len(A)+len(B)
-    return (allNum-2*len(A.intersection(B)))/allNum
+    return (allNum-len(A.intersection(B)))/allNum
 
 
 def PCA(x):
