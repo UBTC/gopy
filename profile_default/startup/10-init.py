@@ -104,6 +104,21 @@ def Jaccard_distance(A,B): return sets_divergence(A,B)
 
 def PCA(x):
     # http://mdp-toolkit.sourceforge.net/
+    ''' is this my previous version?
+        def myPCA(data, nComp=3):
+        " input dim is [x, y], where x is timebin number, and y is PN number "
+        import numpy as NP
+        from scipy import linalg as LA
+        if isinstance(data, list): data = array(data)
+        data -= data.mean(axis=0)
+        R = NP.cov(data, rowvar=0)
+        eVals, eVecs = LA.eigh(R)
+        idx = NP.argsort(eVals)[::-1]
+        eVecs = eVecs[:, idx]
+        eVals = eVals[idx]
+        eVecs = eVecs[:, :nComp]
+        return NP.dot(eVecs.T, data.T).T
+    '''
     return mdp.pca(x)
 
 
