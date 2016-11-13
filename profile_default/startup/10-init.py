@@ -53,7 +53,7 @@ opt = scipy.optimize
 sm = statsmodels.api    # remove when running on cluster!!!
 smf = statsmodels.formula.api    # remove when running on cluster!!!
 
-#mpl.use("pdf")     # uncomment when running on PC!!!
+#mpl.use("pdf")     # uncomment when running on cluster!!!
 
 from functools import reduce
 from scipy import stats, linalg
