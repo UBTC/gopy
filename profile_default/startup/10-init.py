@@ -96,7 +96,7 @@ def sets_divergence(A,B): # A and B are both sets
     """
     if isinstance(A,list) or isinstance(A,numpy.ndarray): A=set(A)
     if isinstance(B,list) or isinstance(B,numpy.ndarray): B=set(B)
-    return (len(A.union(B))-len(A.intersection(B)))/len(A.union(B))
+    return 1.0*(len(A.union(B))-len(A.intersection(B)))/len(A.union(B))
 
 
 def Jaccard_distance(A,B): return sets_divergence(A,B)
