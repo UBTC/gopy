@@ -80,6 +80,7 @@ false = False
 
 def datetime_str(): return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+
 print()
 print(datetime_str())
 
@@ -102,24 +103,23 @@ def sets_divergence(A,B): # A and B are both sets
 def Jaccard_distance(A,B): return sets_divergence(A,B)
 
 
-def PCA(x):
-    # http://mdp-toolkit.sourceforge.net/
-    ''' is this my previous version?
-        def myPCA(data, nComp=3):
-        " input dim is [x, y], where x is timebin number, and y is PN number "
-        import numpy as NP
-        from scipy import linalg as LA
-        if isinstance(data, list): data = array(data)
-        data -= data.mean(axis=0)
-        R = NP.cov(data, rowvar=0)
-        eVals, eVecs = LA.eigh(R)
-        idx = NP.argsort(eVals)[::-1]
-        eVecs = eVecs[:, idx]
-        eVals = eVals[idx]
-        eVecs = eVecs[:, :nComp]
-        return NP.dot(eVecs.T, data.T).T
-    '''
-    return mdp.pca(x)
+def PCA(data, nComp=3):
+    " input dim is [x, y], where x is timebin number, and y is PN number "
+    # return mdp.pca(x) # see also
+    if isinstance(data, list): data = array(data)
+    data -= data.mean(axis=0)
+    R = np.cov(data, rowvar=0)
+    eVals, eVecs = linalg.eigh(R)
+    idx = np.argsort(eVals)[::-1]
+    eVecs = eVecs[:, idx]
+    eVals = eVals[idx]
+    eVecs = eVecs[:, :nComp]
+    return np.dot(eVecs.T, data.T).T
+
+
+def PCAtp(d, n=3):
+    if isinstance(d, list): d = array(d)
+    return PCA(d.T, n).T
 
 
 def myPSD(data, Fs, NFFT):
