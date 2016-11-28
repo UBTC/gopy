@@ -103,12 +103,13 @@ def sets_divergence(A,B): # A and B are both sets
 def Jaccard_distance(A,B): return sets_divergence(A,B)
 
 
-def PCA(data, nComp=3):
+def PCA(data, nComp=3, svas=''):
     " input dim is [x, y], where x is timebin number, and y is PN number "
     # return mdp.pca(x) # see also
     if isinstance(data, list): data = array(data)
     data -= data.mean(axis=0)
     R = np.cov(data, rowvar=0)
+    if svas!='': np.savetxt(svas, R)
     eVals, eVecs = linalg.eigh(R)
     idx = np.argsort(eVals)[::-1]
     eVecs = eVecs[:, idx]
@@ -118,8 +119,27 @@ def PCA(data, nComp=3):
 
 
 def PCAtp(d, n=3):
-    if isinstance(d, list): d = array(d)
     return PCA(d.T, n).T
+
+
+def CAby(data, mat, nComp=3):
+    " input dim is [x, y], where x is timebin number, and y is PN number "
+    if isinstance(data, list): data = array(data)
+    if isinstance(mat,  str):
+        R = loadtxt(mat)
+    elif isinstance(mat, list):
+        R = array(mat)
+    else: R = mat
+    eVals, eVecs = linalg.eigh(R)
+    idx = np.argsort(eVals)[::-1]
+    eVecs = eVecs[:, idx]
+    eVals = eVals[idx]
+    eVecs = eVecs[:, :nComp]
+    return np.dot(eVecs.T, data.T).T
+
+
+def CAbytp(d, m, n=3):
+    return PCA(d.T, m, n).T
 
 
 def myPSD(data, Fs, NFFT):
