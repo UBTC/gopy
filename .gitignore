@@ -56,3 +56,4 @@ profile_default/pid/
 profile_default/log/
 profile_default/security/
 profile_default/history.sqlite
+.ropeproject/
