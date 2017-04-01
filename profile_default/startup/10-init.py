@@ -53,6 +53,11 @@ opt = scipy.optimize
 sm = statsmodels.api    # remove when running on cluster!!!
 smf = statsmodels.formula.api    # remove when running on cluster!!!
 
+try: # Python2:
+    from itertools import imap
+except ImportError: # Python3:
+    imap=map
+
 #mpl.use("pdf")     # uncomment when running on cluster!!!
 
 from functools import reduce
