@@ -120,7 +120,7 @@ def sets_divergence(A,B): # A and B are both sets
 def Jaccard_distance(A,B): return sets_divergence(A,B)
 
 
-def PCA(data, nComp=3, svas=''):
+def PCA(data, nComp=3, svas='', if_ret_all=False):
     " input dim is [x, y], where x is timebin number, and y is PN number "
     # return mdp.pca(x) # see also
     # http://stackoverflow.com/questions/13224362/principal-component-analysis-pca-in-python
