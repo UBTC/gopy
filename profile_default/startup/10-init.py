@@ -77,6 +77,8 @@ from numpy import *
 from scipy import *
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
+# import importlib
+# importlib.import_module('mpl_toolkits.mplot3d').Axes3D
 from scipy import interpolate
 
 true = True
@@ -121,6 +123,7 @@ def Jaccard_distance(A,B): return sets_divergence(A,B)
 def PCA(data, nComp=3, svas=''):
     " input dim is [x, y], where x is timebin number, and y is PN number "
     # return mdp.pca(x) # see also
+    # http://stackoverflow.com/questions/13224362/principal-component-analysis-pca-in-python
     if isinstance(data, list): data = array(data)
     data -= data.mean(axis=0)
     R = np.cov(data, rowvar=0)
@@ -130,7 +133,9 @@ def PCA(data, nComp=3, svas=''):
     eVecs = eVecs[:, idx]
     eVals = eVals[idx]
     eVecs = eVecs[:, :nComp]
-    return np.dot(eVecs.T, data.T).T
+    if if_ret_all:
+        return np.dot(data, eVecs), eVals, eVecs
+    return np.dot(data, eVecs)
 
 
 def PCAtp(d, n=3):
