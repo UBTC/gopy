@@ -25,6 +25,7 @@ from future.utils import listitems
 from future.utils import listvalues #                            !!!
 from functools import reduce
 from builtins import input       # remove when running on cluster^^^
+from typing import *
 
 import re
 import os
@@ -39,6 +40,8 @@ import itertools
 import matplotlib
 # import plotly.plotly
 # import plotly.graph_objs
+import tushare
+import tensorflow
 import scipy.optimize
 import statsmodels.api    # remove when running on cluster!!!
 import statsmodels.formula.api    # remove when running on cluster!!!
@@ -50,6 +53,8 @@ mpl = matplotlib
 opt = scipy.optimize
 # py = plotly.plotly
 # go = plotly.graph_objs
+ts = tushare
+tf = tensorflow
 sm = statsmodels.api    # remove when running on cluster!!!
 smf = statsmodels.formula.api    # remove when running on cluster!!!
 
