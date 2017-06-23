@@ -38,8 +38,7 @@ import pandas    # remove when running on cluster!!!
 import networkx
 import itertools
 import matplotlib
-# import plotly.plotly
-# import plotly.graph_objs
+import pygame
 import tushare
 import tensorflow
 import scipy.optimize
@@ -51,8 +50,7 @@ pd = pandas
 nx = networkx
 mpl = matplotlib
 opt = scipy.optimize
-# py = plotly.plotly
-# go = plotly.graph_objs
+pg = pygame
 ts = tushare
 tf = tensorflow
 sm = statsmodels.api    # remove when running on cluster!!!
