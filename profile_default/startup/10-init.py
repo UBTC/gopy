@@ -30,7 +30,6 @@ from typing import *
 import re
 import os
 import sys
-import mdp    # remove when running on cluster!!!
 import numpy
 import scipy
 import string
@@ -38,10 +37,6 @@ import pandas    # remove when running on cluster!!!
 import networkx
 import itertools
 import matplotlib
-import pygame
-import tushare
-import tensorflow
-import multiprocessing
 import scipy.optimize
 import statsmodels.api    # remove when running on cluster!!!
 import statsmodels.formula.api    # remove when running on cluster!!!
@@ -49,14 +44,27 @@ np = numpy
 sp = scipy
 pd = pandas
 nx = networkx
+itr = itertools
+mp = matplotlib
 mpl = matplotlib
 opt = scipy.optimize
+sm = statsmodels.api    # remove when running on cluster!!!
+sf = statsmodels.formula.api    # remove when running on cluster!!!
+
+'''
+import mdp  # remove when running on cluster!!! on supervised and unsupervised learning algorithms
+import pygame
+import tushare
+import tensorflow
+import multiprocessing
+
+from flask import Flask
+
 pg = pygame
 ts = tushare
 tf = tensorflow
-mp = multiprocessing
-sm = statsmodels.api    # remove when running on cluster!!!
-smf = statsmodels.formula.api    # remove when running on cluster!!!
+mul = multiprocessing
+'''
 
 try: # Python2:
     from itertools import imap
@@ -75,7 +83,7 @@ from IPython.display import display
 from IPython.core.pylabtools import figsize, getfigs
 from datetime import *
 plt = pyplot
-plab = pylab
+plb = pylab
 
 from pylab import *
 from numpy import *
@@ -90,7 +98,8 @@ true = True
 false = False
 
 
-def datetime_str(): return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+def datetime_str():
+    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 
 print()
@@ -122,7 +131,8 @@ def sets_divergence(A,B): # A and B are both sets
     return 1.0*(len(A.union(B))-len(A.intersection(B)))/len(A.union(B))
 
 
-def Jaccard_distance(A,B): return sets_divergence(A,B)
+def Jaccard_distance(A,B):
+    return sets_divergence(A,B)
 
 
 def PCA(data, nComp=3, svas='', if_ret_all=False):
