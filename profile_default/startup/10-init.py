@@ -41,6 +41,7 @@ import matplotlib
 import pygame
 import tushare
 import tensorflow
+import multiprocessing
 import scipy.optimize
 import statsmodels.api    # remove when running on cluster!!!
 import statsmodels.formula.api    # remove when running on cluster!!!
@@ -53,6 +54,7 @@ opt = scipy.optimize
 pg = pygame
 ts = tushare
 tf = tensorflow
+mp = multiprocessing
 sm = statsmodels.api    # remove when running on cluster!!!
 smf = statsmodels.formula.api    # remove when running on cluster!!!
 
