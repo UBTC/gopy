@@ -108,6 +108,28 @@ print(datetime_str())
 
 # ... ... ....
 
+
+#https://stackoverflow.com/questions/2827393/angles-between-two-n-dimensional-vectors-in-python
+def unit_vector(vector):
+    """ Returns the unit vector of the vector.  """
+    return vector / np.linalg.norm(vector)
+
+
+def included_angle(v1, v2):
+    """ Returns the angle in radians between vectors 'v1' and 'v2'::
+
+            >>> included_angle((1, 0, 0), (0, 1, 0))
+            1.5707963267948966
+            >>> included_angle((1, 0, 0), (1, 0, 0))
+            0.0
+            >>> included_angle((1, 0, 0), (-1, 0, 0))
+            3.141592653589793
+    """
+    v1_u = unit_vector(v1)
+    v2_u = unit_vector(v2)
+    return np.arccos(np.clip(np.dot(v1_u, v2_u), -1.0, 1.0))
+
+
 def smooth(x):
     # 1 2 1 smooth on 1d array
     if array(x).ndim != 1:
@@ -118,6 +140,7 @@ def smooth(x):
         y[i]=(x[i-1]+2*x[i]+x[i+1])/4.0
     y[0],y[-1]=x[0],x[-1]
     return y
+
 
 def sets_divergence(A,B): # A and B are both sets
     """
