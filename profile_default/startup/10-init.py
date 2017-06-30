@@ -81,7 +81,7 @@ from numpy.polynomial import polynomial
 from pandas import DataFrame, Series    # remove when running on cluster!!!
 from IPython.display import display
 from IPython.core.pylabtools import figsize, getfigs
-from datetime import *
+from time import *
 plt = pyplot
 plb = pylab
 
@@ -99,8 +99,8 @@ false = False
 
 
 def datetime_str():
-    return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
+    return strftime("%Y-%m-%d %H:%M:%S %A")  #%w
+    # strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
 print()
 print(datetime_str())
