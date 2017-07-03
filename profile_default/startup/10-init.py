@@ -143,16 +143,18 @@ for i in range(stepCnt):
     ys[i + 1] = ys[i] + (y_dot * dt)
     zs[i + 1] = zs[i] + (z_dot * dt)
 
-init_3dp()
+ax=init_3dp()
 plot(xs, ys, zs, lw=0.5)
 xlabel("X Axis")
 ylabel("Y Axis")
-#zlabel("Z Axis") #does not work. have to set_zlabel on some ax
+#zlabel("Z Axis") #does not work. have to set_zlabel on some ax:
+###ax=init_3dp()
+####...plot,xlabel,ylabel
+ax.set_zlabel("Z Axis")
 title("Lorenz Attractor")
 show()
     '''
     print(sc)
-    return sc
 
 
 #https://stackoverflow.com/questions/2827393/angles-between-two-n-dimensional-vectors-in-python
