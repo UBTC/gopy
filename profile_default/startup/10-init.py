@@ -89,7 +89,7 @@ from pylab import *
 from numpy import *
 from scipy import *
 from matplotlib import cm
-# from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import Axes3D
 # import importlib
 # importlib.import_module('mpl_toolkits.mplot3d').Axes3D
 from scipy import interpolate
@@ -100,13 +100,59 @@ false = False
 
 def datetime_str():
     return strftime("%Y-%m-%d %H:%M:%S %A")  #%w
-    # strftime("%Y-%m-%d %H:%M:%S", gmtime())
+    # strftime("%Y-%m-%d %H:%M:%S", localtime())
 
 print()
 print(datetime_str())
 
 
 # ... ... ....
+
+
+def init_3dp():
+    gca(projection='3d')
+    #print('3d plot inited')
+    return gca(projection='3d')
+
+
+def example_3dp():
+    sc = '''
+# example of 3d ploting:
+def lorenz(x, y, z, s=10, r=28, b=2.667):
+    x_dot = s*(y - x)
+    y_dot = r*x - y - x*z
+    z_dot = x*y - b*z
+    return x_dot, y_dot, z_dot
+
+dt = 0.01
+stepCnt = 10000
+
+# Need one more for the initial values
+xs = np.empty((stepCnt + 1,))
+ys = np.empty((stepCnt + 1,))
+zs = np.empty((stepCnt + 1,))
+
+# Setting initial values
+xs[0], ys[0], zs[0] = (0., 1., 1.05)
+
+# Stepping through "time".
+for i in range(stepCnt):
+    # Derivatives of the X, Y, Z state
+    x_dot, y_dot, z_dot = lorenz(xs[i], ys[i], zs[i])
+    xs[i + 1] = xs[i] + (x_dot * dt)
+    ys[i + 1] = ys[i] + (y_dot * dt)
+    zs[i + 1] = zs[i] + (z_dot * dt)
+
+init_3dp()
+plot(xs, ys, zs, lw=0.5)
+xlabel("X Axis")
+ylabel("Y Axis")
+#zlabel("Z Axis") #does not work. have to set_zlabel on some ax
+title("Lorenz Attractor")
+show()
+    '''
+    print(sc)
+    return sc
 
 
 #https://stackoverflow.com/questions/2827393/angles-between-two-n-dimensional-vectors-in-python
