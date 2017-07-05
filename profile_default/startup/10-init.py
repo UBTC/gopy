@@ -37,6 +37,8 @@ import pandas    # remove when running on cluster!!!
 import networkx
 import itertools
 import matplotlib
+import seaborn
+import sklearn
 import scipy.optimize
 import statsmodels.api    # remove when running on cluster!!!
 import statsmodels.formula.api    # remove when running on cluster!!!
@@ -47,6 +49,8 @@ nx = networkx
 itr = itertools
 mp = matplotlib
 mpl = matplotlib
+sb = seaborn
+sk = sklearn
 opt = scipy.optimize
 sm = statsmodels.api    # remove when running on cluster!!!
 sf = statsmodels.formula.api    # remove when running on cluster!!!
