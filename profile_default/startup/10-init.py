@@ -253,6 +253,10 @@ def CAbytp(d, m, n=3):
     return PCA(d.T, m, n).T
 
 
+def corr(x, y, rowvar=True, bias=np._NoValue, ddof=np._NoValue): return np.corrcoef(x,y,rowvar,bias,ddof)[0,1]
+# https://github.com/numpy/numpy/blob/v1.13.0/numpy/lib/function_base.py#L3092-L3172
+
+
 def myPSD(data, Fs, NFFT):
     """
       this function return the power and corresponding freq of data
