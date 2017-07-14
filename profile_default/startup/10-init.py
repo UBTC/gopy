@@ -183,6 +183,19 @@ def included_angle(v1, v2):
     return angle, np.degrees(angle)
 
 
+def lifetimeSparseness(data):
+    # forked from andrewgiessel/gist:5708977
+    # http://wilson.med.harvard.edu/SupplementalMaterialBhandawat2007.pdf (page 12)
+    # a measure of selectivity calculated separately for each single neuron across all patterns
+    # revised by MW
+    #
+    assert type(data) in {np.ndarray, list}
+    N = len(data)
+    Z = np.power(np.mean(data), 2)
+    M = np.mean(np.power(data, 2))
+    return N * (1 - Z/M) / (N - 1)
+
+
 def smooth(x):
     # 1 2 1 smooth on 1d array
     if array(x).ndim != 1:
