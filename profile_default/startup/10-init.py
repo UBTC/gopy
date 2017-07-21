@@ -212,11 +212,11 @@ def included_angle_line(l1, l2):
 
 def avg_degree(angles):
     # 计算角度平均值，注意0-360度情况
-    # https://stackoverflow.com/questions/491738/how-do-you-calculate-the-average-of-a-set-of-circular-data/3651941#3651941
+    # https://stackoverflow.com/questions/491738/how-do-you-calculate-the-average-of-a-set-of-circular-data
     # https://en.wikipedia.org/wiki/Mean_of_circular_quantities
     fz_list = [sin(x) for x in angles]
     fm_list = [cos(x) for x in angles]
-    return arctan(sum(fz_list)/sum(fm_list))
+    return arctan2(sum(fz_list), sum(fm_list))
 
 
 def lifetimeSparseness(data):
