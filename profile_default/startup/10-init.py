@@ -167,20 +167,47 @@ def unit_vector(vector):
     return vector / np.linalg.norm(vector)
 
 
-def included_angle(v1, v2):
-    """ Returns the angle in radians between vectors 'v1' and 'v2'::
+def included_angle_vector(v1, v2):
+    """
+    Returns the angle in radians between vectors 'v1' and 'v2'::
+    in the region [0,pi)
 
-            >>> included_angle((1, 0, 0), (0, 1, 0))
-            1.5707963267948966
-            >>> included_angle((1, 0, 0), (1, 0, 0))
-            0.0
-            >>> included_angle((1, 0, 0), (-1, 0, 0))
-            3.141592653589793
+        In [35]: included_angle_vector((1, 0, 0), (0, 1, 0))
+        Out[35]: (1.5707963267948966, 90.0)
+
+        In [36]: included_angle_vector((1, 0, 0), (1, 0, 0))
+        Out[36]: (0.0, 0.0)
+
+        In [37]: included_angle_vector((1, 0, 0), (-1, 0, 0))
+        Out[37]: (3.1415926535897931, 180.0)
+
     """
     v1_u = unit_vector(v1)
     v2_u = unit_vector(v2)
     angle = np.arccos(np.clip(np.dot(v1_u, v2_u), -1.0, 1.0))
     return angle, np.degrees(angle)
+
+
+def included_angle_line(l1, l2):
+    """
+    Returns the angle in radians between lines 'l1' and 'l2'::
+    in the region [0,pi/2)
+
+        In [38]: included_angle_line((1, 0, 0), (-1, 0, 0))
+        Out[38]: (0.0, 0.0)
+
+        In [39]: included_angle_line((1, 0, 0), (1, 0, 0))
+        Out[39]: (0.0, 0.0)
+
+        In [40]: included_angle_line((1, 0, 0), (0, 1, 0))
+        Out[40]: (1.5707963267948966, 90.0)
+
+    """
+    ang, deg = included_angle_vector(l1, l2)
+    if ang > 0.5*pi:
+        ang = pi-ang
+        deg = 180-deg
+    return ang, deg
 
 
 def lifetimeSparseness(data):
