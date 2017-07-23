@@ -37,6 +37,7 @@ import pandas    # remove when running on cluster!!!
 import networkx
 import itertools
 import matplotlib
+import tensorflow
 import seaborn
 import sklearn
 import scipy.optimize
@@ -49,6 +50,7 @@ nx = networkx
 itr = itertools
 mp = matplotlib
 mpl = matplotlib
+tf = tensorflow
 sb = seaborn
 sk = sklearn
 opt = scipy.optimize
@@ -59,14 +61,12 @@ sf = statsmodels.formula.api    # remove when running on cluster!!!
 import mdp  # remove when running on cluster!!! on supervised and unsupervised learning algorithms
 import pygame
 import tushare
-import tensorflow
 import multiprocessing
 
 from flask import Flask
 
 pg = pygame
 ts = tushare
-tf = tensorflow
 mul = multiprocessing
 '''
 
