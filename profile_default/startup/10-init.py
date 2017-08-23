@@ -47,9 +47,8 @@ np = numpy
 sp = scipy
 pd = pandas
 nx = networkx
-itr = itertools
-mp = matplotlib
-mpl = matplotlib
+it = itr = itertools
+mp = mpl = matplotlib
 tf = tensorflow
 sb = seaborn
 sk = sklearn
@@ -75,28 +74,30 @@ try: # Python2:
 except ImportError: # Python3:
     imap=map
 
-#mpl.use("pdf")     # uncomment when running on cluster!!!
-
-from functools import reduce
-from scipy import stats, linalg
-from matplotlib import pylab, mlab, pyplot
-from numpy.random import rand, randn
-from numpy.polynomial import polynomial
-from pandas import DataFrame, Series    # remove when running on cluster!!!
-from IPython.display import display
-from IPython.core.pylabtools import figsize, getfigs
-from time import *
-plt = pyplot
-plb = pylab
-
-from pylab import *
-from numpy import *
-from scipy import *
 from matplotlib import cm
+from scipy import interpolate
+from scipy import stats, linalg
+from pandas import DataFrame, Series    # remove when running on cluster!!!
+from numpy.polynomial import polynomial
 from mpl_toolkits.mplot3d import Axes3D
 # import importlib
 # importlib.import_module('mpl_toolkits.mplot3d').Axes3D
-from scipy import interpolate
+from matplotlib import pylab, mlab, pyplot
+ss, la = stats, linalg
+plt, plb = pyplot, pylab
+
+from time import *
+from pylab import *
+from numpy import *
+from scipy.stats import *
+from scipy.linalg import *
+from scipy import *
+from IPython.display import * #display
+from IPython.core.pylabtools import * #figsize, getfigs
+from numpy.random import * #rand, randn
+
+#mpl.use("pdf")     # uncomment when running on cluster!!!
+
 
 true = True
 false = False
