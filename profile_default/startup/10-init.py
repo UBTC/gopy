@@ -56,6 +56,15 @@ opt = scipy.optimize
 sm = statsmodels.api    # remove when running on cluster!!!
 sf = statsmodels.formula.api    # remove when running on cluster!!!
 
+import findspark
+findspark.init()
+# init findspark, so we can import spark libs
+# import spark things now
+from pyspark import SparkContext
+from pyspark import SparkConf
+Cont=SparkContext
+Conf=SparkConf
+
 '''
 import mdp  # remove when running on cluster!!! on supervised and unsupervised learning algorithms
 import pygame
@@ -65,7 +74,7 @@ import multiprocessing
 from flask import Flask
 
 pg = pygame
-ts = tushare
+tu = tushare
 mul = multiprocessing
 '''
 
