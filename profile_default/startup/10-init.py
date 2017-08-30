@@ -65,6 +65,36 @@ from pyspark import SparkConf
 Cont=SparkContext
 Conf=SparkConf
 
+def spark_app_eg():
+    app_sc = '''
+## Spark Application - execute with spark-submit
+## copied from:
+##   http://blog.jobbole.com/86232/
+
+## Imports
+from pyspark import SparkConf, SparkContext
+ 
+## Module Constants
+APP_NAME = "My Spark Application"
+ 
+## Closure Functions
+ 
+## Main functionality
+ 
+def main(sc):
+    pass
+ 
+if __name__ == "__main__":
+    # Configure Spark
+    conf = SparkConf().setAppName(APP_NAME)
+    conf = conf.setMaster("local[*]")
+    sc   = SparkContext(conf=conf)
+ 
+    # Execute Main functionality
+    main(sc)
+'''
+    print(app_sc)
+
 '''
 import mdp  # remove when running on cluster!!! on supervised and unsupervised learning algorithms
 import pygame
