@@ -56,6 +56,8 @@ opt = scipy.optimize
 sm = statsmodels.api    # remove when running on cluster!!!
 sf = statsmodels.formula.api    # remove when running on cluster!!!
 
+#mpl.use("pdf")     # uncomment when running on cluster!!!
+
 import findspark
 findspark.init()
 # init findspark, so we can import spark libs
@@ -134,8 +136,6 @@ from scipy import *
 from IPython.display import * #display
 from IPython.core.pylabtools import * #figsize, getfigs
 from numpy.random import * #rand, randn
-
-#mpl.use("pdf")     # uncomment when running on cluster!!!
 
 
 true = True
