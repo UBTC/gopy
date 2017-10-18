@@ -27,6 +27,7 @@ from functools import reduce
 from builtins import input       # remove when running on cluster^^^
 from typing import *
 
+
 import re
 import os
 import sys
@@ -58,6 +59,7 @@ sf = statsmodels.formula.api    # remove when running on cluster!!!
 
 #mpl.use("pdf")     # uncomment when running on cluster!!!
 
+
 import findspark
 findspark.init()
 # init findspark, so we can import spark libs
@@ -67,35 +69,38 @@ from pyspark import SparkConf
 Cont=SparkContext
 Conf=SparkConf
 
+
 def spark_app_eg():
     app_sc = '''
 ## Spark Application - execute with spark-submit
 ## copied from:
 ##   http://blog.jobbole.com/86232/
+##   http://spark.apachecn.org/docs/cn/2.2.0/rdd-programming-guide.html
 
 ## Imports
 from pyspark import SparkConf, SparkContext
- 
+
 ## Module Constants
 APP_NAME = "My Spark Application"
- 
+
 ## Closure Functions
- 
+
 ## Main functionality
- 
+
 def main(sc):
     pass
- 
+
 if __name__ == "__main__":
     # Configure Spark
     conf = SparkConf().setAppName(APP_NAME)
     conf = conf.setMaster("local[*]")
     sc   = SparkContext(conf=conf)
- 
+
     # Execute Main functionality
     main(sc)
 '''
     print(app_sc)
+
 
 '''
 import mdp  # remove when running on cluster!!! on supervised and unsupervised learning algorithms
@@ -109,6 +114,7 @@ pg = pygame
 tu = tushare
 mul = multiprocessing
 '''
+
 
 try: # Python2:
     from itertools import imap
