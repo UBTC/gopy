@@ -39,7 +39,6 @@ import networkx
 import itertools
 import matplotlib
 import tensorflow
-import seaborn
 import sklearn
 import scipy.optimize
 import statsmodels.api    # remove when running on cluster!!!
@@ -51,13 +50,13 @@ nx = networkx
 it = itr = itertools
 mp = mpl = matplotlib
 tf = tensorflow
-sb = seaborn
 sk = sklearn
 opt = scipy.optimize
 sm = statsmodels.api    # remove when running on cluster!!!
 sf = statsmodels.formula.api    # remove when running on cluster!!!
 
 #mpl.use("pdf")     # uncomment when running on cluster!!!
+mpl.use("Agg")     # uncomment when running on cluster!!!
 
 
 import findspark
@@ -130,6 +129,8 @@ from mpl_toolkits.mplot3d import Axes3D
 # import importlib
 # importlib.import_module('mpl_toolkits.mplot3d').Axes3D
 from matplotlib import pylab, mlab, pyplot
+import seaborn
+sb = seaborn
 ss, la = stats, linalg
 plt, plb = pyplot, pylab
 
@@ -209,12 +210,12 @@ show()
 
 #https://stackoverflow.com/questions/2827393/angles-between-two-n-dimensional-vectors-in-python
 def unit_vector(vector):
-    """ Returns the unit vector of the vector.  """
+    ''' Returns the unit vector of the vector.  '''
     return vector / np.linalg.norm(vector)
 
 
 def included_angle_vector(v1, v2):
-    """
+    '''
     Returns the angle in radians between vectors 'v1' and 'v2'::
     in the region [0,pi)
 
@@ -227,7 +228,7 @@ def included_angle_vector(v1, v2):
         In [37]: included_angle_vector((1, 0, 0), (-1, 0, 0))
         Out[37]: (3.1415926535897931, 180.0)
 
-    """
+    '''
     v1_u = unit_vector(v1)
     v2_u = unit_vector(v2)
     angle = np.arccos(np.clip(np.dot(v1_u, v2_u), -1.0, 1.0))
@@ -235,7 +236,7 @@ def included_angle_vector(v1, v2):
 
 
 def included_angle_line(l1, l2):
-    """
+    '''
     Returns the angle in radians between lines 'l1' and 'l2'::
     in the region [0,pi/2)
 
@@ -248,7 +249,7 @@ def included_angle_line(l1, l2):
         In [40]: included_angle_line((1, 0, 0), (0, 1, 0))
         Out[40]: (1.5707963267948966, 90.0)
 
-    """
+    '''
     ang, deg = included_angle_vector(l1, l2)
     if ang > 0.5*pi:
         ang = pi-ang
@@ -291,12 +292,12 @@ def smooth(x):
 
 
 def sets_divergence(A,B): # A and B are both sets
-    """
+    '''
         The Jaccard distance measures dissimilarity between sample sets.
         It is obtained by dividing the difference of the sizes of
            the union and the intersection of two sets, by the size of the union.
         https://en.wikipedia.org/wiki/Jaccard_index
-    """
+    '''
     if isinstance(A,list) or isinstance(A,numpy.ndarray): A=set(A)
     if isinstance(B,list) or isinstance(B,numpy.ndarray): B=set(B)
     return 1.0*(len(A.union(B))-len(A.intersection(B)))/len(A.union(B))
@@ -358,7 +359,7 @@ def eucd(x, y):
 
 
 def myPSD(data, Fs, NFFT):
-    """
+    '''
       this function return the power and corresponding freq of data
       ...
       the original data is transferred via `data`, which is usually an 1d list.
@@ -377,14 +378,14 @@ def myPSD(data, Fs, NFFT):
       ylabel('power (dB/Hz?)')
       savefig("psd.eps")
       show()
-    """
+    '''
     p,f = psd(data-mean(data), Fs, NFFT)
     clf()
     return p,f
 
 
 def bandpower(data, Fs, NFFT, winLen, winStepLen, lowerLimit, upperLimit):
-    """
+    '''
       this function return the bandpower in [lowerLimit, upperLimit]
       the original data is transferred via `data`, and is cutted to windows.
       The windows are defined by winLen and winSteplen
@@ -416,7 +417,7 @@ def bandpower(data, Fs, NFFT, winLen, winStepLen, lowerLimit, upperLimit):
       ylabel('bandpower ~20Hz')
       savefig("bandpower_20Hz.eps")
       show()
-    """
+    '''
     all_win_val = []
     for wi_begin in range(0, len(data)-winLen+winStepLen, winStepLen): # window, the i step
         wi_end = wi_begin + winLen
@@ -454,7 +455,7 @@ def jittering(lls, randScale=0.01, sampleNum=3):  # a simple jittering function
     # http://matplotlib.1069221.n5.nabble.com/jitter-in-matplotlib-td12573.html
     return stats.norm.rvs(loc=lls, scale=randScale, size=(sampleNum, len(lls)))
 
-"""
+'''
 xs,ys = np.random.random((2,5))
 plt.scatter(xs, ys, c='b')
 # create jittered data for x and y coords
@@ -462,7 +463,7 @@ xs_jit = jittering(xs)
 ys_jit = jittering(ys)
 plt.scatter(xs_jit, ys_jit, c='r')
 plt.show()
-"""
+'''
 
 
 def enum(x): # a shoter enumerate
@@ -480,7 +481,7 @@ def rlen(x):
 # 9 1.0
 
 
-"""
+'''
 muloop([12])
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
@@ -500,7 +501,7 @@ for i,j in muloop([12,-2]):
 for i,j in muloop([12,2]):
     print(i,j)
 [multi-loops]
-"""
+'''
 
 def muloop(x):
     if not (isinstance(x,list) or isinstance(x,numpy.ndarray) or isinstance(x,tuple)):
@@ -536,7 +537,7 @@ def muloop(x):
 
 # https://github.com/sciy/temFlow/blob/master/list_process.py
 def outter_flatten(lst):
-    """only flat the outter level"""
+    '''only flat the outter level'''
     new_lst = []
     for x in lst:
         if isinstance(x, list):
@@ -638,7 +639,7 @@ def polyval2d(x, y, m):
     for a, (i,j) in zip(flatten(m), ij):  z = z + a * x**i * y**j
     return z
 
-"""
+'''
 a=array([ [i, j, i**2+(100-j)**2]  for i in range(100)  for j in range(100) ])
 
 m = polyfit2d(a[:,0], a[:,1], a[:,2], [3,3]) # fits it!
@@ -660,7 +661,7 @@ The above matrix m gives coefficients of (x, y)
 tmp = polyval2d(a[:,0], a[:,1], m) # compute the fitting vals at each point
 
 plot(abs(tmp-a[:,2])) # checherrors
-"""
+'''
 
 
 # Default styles for Matplotlib, makes it a better MPL,
@@ -700,9 +701,9 @@ plt.rc('figure', figsize=(12, 9), dpi=300)    # figure size in inches
 #  'm': (0.75, 0, 0.75)}
 
 def hex2color(s):
-    """
+    '''
     Take a hex string *s* and return the corresponding rgb 3-tuple
-    Example: #efefef -> (0.93725, 0.93725, 0.93725)    """
+    Example: #efefef -> (0.93725, 0.93725, 0.93725)    '''
     hexColorPattern = re.compile("\\A#[a-fA-F0-9]{6}\\Z")
     if not isinstance(s, str):
         raise TypeError('hex2color requires a string argument')
