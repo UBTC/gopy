@@ -158,6 +158,14 @@ print(datetime_str())
 
 
 # ... ... ....
+def is_sequence(arg):
+    # https://stackoverflow.com/questions/1835018/how-to-check-if-an-object-is-a-list-or-tuple-but-not-string
+    return (not hasattr(arg, "strip") and
+            hasattr(arg, "__getitem__") or
+            hasattr(arg, "__iter__"))
+
+#is_sequence(13) # False
+#is_sequence([13])  True
 
 
 def init_3dp():
