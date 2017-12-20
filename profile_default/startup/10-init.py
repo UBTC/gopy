@@ -265,6 +265,17 @@ def included_angle_line(l1, l2):
     return ang, deg
 
 
+def logit(p):
+    #  return log(p/(1-p))
+    return log(p)-log(1-p)
+
+
+def logis(x):
+    # logistic (sigmoid) function &
+    # logit is the reverse of logis
+    return 1/(1+exp(-1*x))
+
+
 def avg_degree(angles):
     # 计算角度平均值，注意0-360度情况
     # https://stackoverflow.com/questions/491738/how-do-you-calculate-the-average-of-a-set-of-circular-data
