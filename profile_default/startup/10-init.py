@@ -39,7 +39,6 @@ import networkx
 import itertools
 import matplotlib
 import tensorflow
-import sklearn
 import scipy.optimize
 import statsmodels.api    # remove when running on cluster!!!
 import statsmodels.formula.api    # remove when running on cluster!!!
@@ -50,13 +49,59 @@ nx = networkx
 it = itr = itertools
 mp = mpl = matplotlib
 tf = tensorflow
-sk = sklearn
 opt = scipy.optimize
 sm = statsmodels.api    # remove when running on cluster!!!
 sf = statsmodels.formula.api    # remove when running on cluster!!!
 
 #mpl.use("pdf")     # uncomment when running on cluster!!!
-mpl.use("Agg")     # uncomment when running on cluster!!!
+#mpl.use("Agg")     # uncomment when running on cluster!!!
+
+import sklearn
+from sklearn import preprocessing
+from sklearn.feature_selection import SelectFromModel, SelectKBest, SelectPercentile
+from sklearn.feature_selection import f_classif, chi2, RFE
+from sklearn import model_selection
+from sklearn.model_selection import train_test_split, GridSearchCV, KFold
+from tpot import TPOTClassifier
+from sklearn.cross_validation import StratifiedKFold, cross_val_score
+from sklearn.metrics import accuracy_score, roc_auc_score, classification_report
+from sklearn.metrics import precision_score, recall_score, f1_score
+#
+from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.ensemble import ExtraTreesClassifier, AdaBoostClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.linear_model import LogisticRegression
+from xgboost import XGBClassifier, XGBRegressor
+from sklearn.pipeline import make_pipeline
+#
+sl = sklearn
+pp = preprocessing
+#
+pd.options.display.max_columns = 100
+pd.options.display.max_rows = 100
+#
+le = pp.LabelEncoder()
+ohe = pp.OneHotEncoder() # manually?
+
+
+# add some sl related functions
+def get_col_val(dataframe, colname):
+    # to obtain the value set of a certain col
+    # get_col_val_set(df, 'Sex') : ['female', 'male']
+    return sort(dataframe[colname].unique())
+
+
+def do_1hot_encoding(dt, features):
+    for feature in features:
+        if feature in dt.columns:
+            dummies = pd.get_dummies(dt[feature], prefix=feature)
+            dt = pd.concat([dt, dummies], axis=1)
+    return dt
 
 
 import findspark
@@ -693,7 +738,7 @@ plot(abs(tmp-a[:,2])) # checherrors
 plt.style.use('ggplot')
 
 # See http://matplotlib.sourceforge.net/api/figure_api.html#matplotlib.figure.Figure
-plt.rc('figure', figsize=(12, 9), dpi=300)    # figure size in inches
+plt.rc('figure', figsize=(16, 12), dpi=300)    # figure size in inches
 # TODO Set for 1 column size (with crop please)
 
 
