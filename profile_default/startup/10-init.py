@@ -27,7 +27,6 @@ from functools import reduce
 from builtins import input       # remove when running on cluster^^^
 from typing import *
 
-
 import re
 import os
 import sys
@@ -62,22 +61,26 @@ from sklearn.feature_selection import SelectFromModel, SelectKBest, SelectPercen
 from sklearn.feature_selection import f_classif, chi2, RFE
 from sklearn import model_selection
 from sklearn.model_selection import train_test_split, GridSearchCV, KFold
-from tpot import TPOTClassifier
+from tpot import TPOTClassifier, TPOTRegressor
 from sklearn.cross_validation import StratifiedKFold, cross_val_score
 from sklearn.metrics import accuracy_score, roc_auc_score, classification_report
 from sklearn.metrics import precision_score, recall_score, f1_score
+from sklearn.utils import resample # np.random.choice
 #
 from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.ensemble import ExtraTreesClassifier, AdaBoostClassifier
+from sklearn.ensemble import ExtraTreesClassifier, AdaBoostClassifier, VotingClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.linear_model import LogisticRegression
-from xgboost import XGBClassifier, XGBRegressor
 from sklearn.pipeline import make_pipeline
+from sklearn.pipeline import make_pipeline
+#
+from hmmlearn.hmm import GaussianHMM, MultinomialHMM
+from xgboost import XGBClassifier, XGBRegressor
 #
 sl = sklearn
 pp = preprocessing
@@ -88,22 +91,6 @@ pd.options.display.max_rows = 100
 le = pp.LabelEncoder()
 ohe = pp.OneHotEncoder() # manually?
 
-
-# add some sl related functions
-def get_col_val(dataframe, colname):
-    # to obtain the value set of a certain col
-    # get_col_val_set(df, 'Sex') : ['female', 'male']
-    return sort(dataframe[colname].unique())
-
-
-def do_1hot_encoding(dt, features):
-    for feature in features:
-        if feature in dt.columns:
-            dummies = pd.get_dummies(dt[feature], prefix=feature)
-            dt = pd.concat([dt, dummies], axis=1)
-    return dt
-
-
 import findspark
 findspark.init()
 # init findspark, so we can import spark libs
@@ -113,52 +100,19 @@ from pyspark import SparkConf
 Cont=SparkContext
 Conf=SparkConf
 
-
-def spark_app_eg():
-    app_sc = '''
-## Spark Application - execute with spark-submit
-## copied from:
-##   http://blog.jobbole.com/86232/
-##   http://spark.apachecn.org/docs/cn/2.2.0/rdd-programming-guide.html
-
-## Imports
-from pyspark import SparkConf, SparkContext
-
-## Module Constants
-APP_NAME = "My Spark Application"
-
-## Closure Functions
-
-## Main functionality
-
-def main(sc):
-    pass
-
-if __name__ == "__main__":
-    # Configure Spark
-    conf = SparkConf().setAppName(APP_NAME)
-    conf = conf.setMaster("local[*]")
-    sc   = SparkContext(conf=conf)
-
-    # Execute Main functionality
-    main(sc)
-'''
-    print(app_sc)
-
+import tushare
+ts = tushare
 
 '''
 import mdp  # remove when running on cluster!!! on supervised and unsupervised learning algorithms
 import pygame
-import tushare
 import multiprocessing
 
 from flask import Flask
 
 pg = pygame
-tu = tushare
 mul = multiprocessing
 '''
-
 
 try: # Python2:
     from itertools import imap
@@ -192,6 +146,57 @@ from numpy.random import * #rand, randn
 
 true = True
 false = False
+
+
+# add some sl related functions
+def get_col_val(dataframe, colname):
+    # to obtain the value set of a certain col
+    # get_col_val_set(df, 'Sex') : ['female', 'male']
+    return sort(dataframe[colname].unique())
+
+
+def do_1hot_encoding(dt, features, replace=True):
+    for feature in features:
+        if feature in dt.columns:
+            dummies = pd.get_dummies(dt[feature], prefix=feature)
+            #---
+            if replace:
+                dt = pd.concat([dt, dummies], axis=1).drop(feature, inplace=True, axis=1)
+            else:
+                dt = pd.concat([dt, dummies], axis=1)
+    return dt
+
+
+def spark_app_eg():
+    app_sc = '''
+## Spark Application - execute with spark-submit
+## copied from:
+##   http://blog.jobbole.com/86232/
+##   http://spark.apachecn.org/docs/cn/2.2.0/rdd-programming-guide.html
+
+## Imports
+from pyspark import SparkConf, SparkContext
+
+## Module Constants
+APP_NAME = "My Spark Application"
+
+## Closure Functions
+
+## Main functionality
+
+def main(sc):
+    pass
+
+if __name__ == "__main__":
+    # Configure Spark
+    conf = SparkConf().setAppName(APP_NAME)
+    conf = conf.setMaster("local[*]")
+    sc   = SparkContext(conf=conf)
+
+    # Execute Main functionality
+    main(sc)
+'''
+    print(app_sc)
 
 
 def datetime_str():
