@@ -61,15 +61,14 @@ from sklearn.feature_selection import SelectFromModel, SelectKBest, SelectPercen
 from sklearn.feature_selection import f_classif, chi2, RFE
 from sklearn import model_selection
 from sklearn.model_selection import train_test_split, GridSearchCV, KFold
-from tpot import TPOTClassifier, TPOTRegressor
+# from tpot import TPOTClassifier
 from sklearn.cross_validation import StratifiedKFold, cross_val_score
 from sklearn.metrics import accuracy_score, roc_auc_score, classification_report
 from sklearn.metrics import precision_score, recall_score, f1_score
-from sklearn.utils import resample # np.random.choice
 #
-from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.ensemble import ExtraTreesClassifier, AdaBoostClassifier, VotingClassifier
+from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor, VotingClassifier
+from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, AdaBoostClassifier
+from sklearn.utils import resample # np.random.choice
 from sklearn.neural_network import MLPClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
@@ -77,9 +76,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
-from sklearn.pipeline import make_pipeline
-#
-from hmmlearn.hmm import GaussianHMM, MultinomialHMM
 from xgboost import XGBClassifier, XGBRegressor
 #
 sl = sklearn
@@ -147,6 +143,15 @@ from numpy.random import * #rand, randn
 true = True
 false = False
 
+
+def get_extremum(xlist):
+    '''
+    return an array (same length with xlist), in which
+        +1 indicates max
+        -1 indicates min
+    '''
+    ylist = sign(append(0, diff(xlist)))
+    return -1*array(sign(append(0, diff(ylist))))
 
 # add some sl related functions
 def get_col_val(dataframe, colname):
